@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="panel">
+
+
+  <link name="world"> </link>
+  
+  <joint name="dummy_joint" type="fixed">
+    <origin xyz="0 0 -0.23" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+  
+  
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.1622376292296 0.672269750597424 0.645926380012955"
+        rpy="0 0 0" />
+      <mass
+        value="13.2398333468078" />
+      <inertia
+        ixx="0.563223395640389"
+        ixy="1.43503970980149E-07"
+        ixz="0.000789850468301527"
+        iyy="0.0430934733295071"
+        iyz="-0.0263104055796576"
+        izz="0.584931485918816" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://panel/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://panel/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

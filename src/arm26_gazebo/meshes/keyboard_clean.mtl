@@ -1,0 +1,63 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v5.0.0)
+
+newmtl 111_002
+Kd 1 1 1
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 1 1 1
+Ni 1
+illum 1
+map_Kd keyboard_texture_0001.png
+
+newmtl KEYCAP_003
+Kd 0.0071934802 0.0071934802 0.0071934802
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 0 0 0
+Ni 1
+Ns 250
+illum 2
+
+newmtl _007
+Kd 1 1 1
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 1 1 1
+Ni 1
+illum 1
+
+newmtl m6mat
+Kd 1 1 1
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 0 0 0
+Ni 1
+illum 1
+
+newmtl material
+Kd 1 1 1
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 1 0 0
+Ni 1
+illum 1
+
+newmtl material_2
+Kd 0 0 0
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 0 0 0
+Ni 1
+Ns 490
+illum 2
+
+newmtl material_5
+Kd 1 1 1
+Ka 0.1 0.1 0.1
+Ks 0.40000001 0.40000001 0.40000001
+Ke 1 1 1
+Ni 1
+illum 1
+map_Kd keyboard_texture_0001.png
+

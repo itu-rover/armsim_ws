@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Set the param that trajectory_execution_manager needs to find the controller plugin -->
+  <!-- Must be in move_group namespace -->
+  <param name="move_group/moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+
+  <!-- Load controller list in move_group namespace -->
+  <rosparam ns="move_group" file="$(find arm26_config)/config/simple_moveit_controllers.yaml"/>
+  
+  <!-- Also load at root for compatibility -->
+  <rosparam file="$(find arm26_config)/config/simple_moveit_controllers.yaml"/>
+</launch>

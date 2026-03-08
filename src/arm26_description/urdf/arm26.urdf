@@ -1,0 +1,298 @@
+<?xml version="1.0" ?>
+<robot name="arm26" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find arm26_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find arm26_description)/urdf/arm26.trans" />
+<xacro:include filename="$(find arm26_description)/urdf/arm26.gazebo" />
+
+<!-- World link (dummy link for KDL - root link should not have inertia) -->
+<link name="world"/>
+
+<joint name="world_joint" type="fixed">
+  <parent link="world"/>
+  <child link="base_link"/>
+  <!-- Raised slightly to clear any base geometry -->
+  <origin xyz="0 0 0.01" rpy="0 0 0"/>
+</joint>
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0001494186216445949 -0.057856820518659154 0.012203591296941017" rpy="0 0 0"/>
+    <mass value="4.149951843780808"/>
+    <inertia ixx="0.013252" iyy="0.005876" izz="0.017394" ixy="2.4e-05" iyz="0.000148" ixz="1.2e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <!-- Simplified collision box to avoid screw-induced instability -->
+  <collision>
+    <origin xyz="0 -0.05 0.02" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.15 0.15 0.04"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link1">
+  <inertial>
+    <origin xyz="-0.03162693986020312 6.716924561527689e-07 0.05906389755972265" rpy="0 0 0"/>
+    <mass value="3.3247427356644113"/>
+    <inertia ixx="0.006201" iyy="0.010034" izz="0.007533" ixy="0.0" iyz="-0.0" ixz="0.002248"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.0 -0.027" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 -0.027" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link2">
+  <inertial>
+    <origin xyz="0.010335552388907536 -0.19934338945033253 0.00067650678654263" rpy="0 0 0"/>
+    <mass value="9.18293511796802"/>
+    <inertia ixx="0.323632" iyy="0.011381" izz="0.324997" ixy="0.016008" iyz="0.001048" ixz="-4.6e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.0 -0.108" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 -0.108" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link3">
+  <inertial>
+    <origin xyz="4.513809691758714e-05 0.040095056006733076 0.0826878156915512" rpy="0 0 0"/>
+    <mass value="2.4280645323200156"/>
+    <inertia ixx="0.004001" iyy="0.003022" izz="0.003799" ixy="2e-06" iyz="-0.0004" ixz="3e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0005 0.449997 -0.109563" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0005 0.449997 -0.109563" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link4">
+  <inertial>
+    <origin xyz="-0.0065433654973577615 0.12297156562417152 0.0011685861218744265" rpy="0 0 0"/>
+    <mass value="6.866507133880065"/>
+    <inertia ixx="0.094571" iyy="0.022582" izz="0.112788" ixy="0.004442" iyz="-0.000826" ixz="3.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0005 0.355071 -0.197956" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0005 0.355071 -0.197956" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link5">
+  <inertial>
+    <origin xyz="0.000666138384162843 -0.014214018685693459 -0.00022337120043183778" rpy="0 0 0"/>
+    <mass value="1.7111211099661283"/>
+    <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0005 0.009336 -0.201192" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0005 0.009336 -0.201192" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link6">
+  <inertial>
+    <origin xyz="0.0011200028907225378 0.08358498969818481 0.00023404094769324812" rpy="0 0 0"/>
+    <mass value="1.8422484903222005"/>
+    <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" iyz="0" ixz="0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0005 0.009336 -0.201192" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0005 0.009336 -0.201192" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://arm26_description/meshes/link6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- End effector link (virtual) for MoveIt -->
+<link name="link_ee"/>
+
+<!-- Joint 1: Base rotation - widened for better IK workspace -->
+<joint name="joint1" type="revolute">
+  <origin xyz="0.0 0.0 0.027" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit lower="-2.9" upper="2.9" effort="1000" velocity="20"/>
+  <dynamics damping="5.0" friction="0.3"/>
+</joint>
+
+<!-- Joint 2: Shoulder - FLIPPED limits to positive -->
+<joint name="joint2" type="revolute">
+  <origin xyz="0.0 0.0 0.081" rpy="0 0 0"/>
+  <parent link="link1"/>
+  <child link="link2"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+  <limit lower="0.1" upper="3.14" effort="1000" velocity="20"/>
+  <dynamics damping="5.0" friction="0.3"/>
+</joint>
+
+<!-- Joint 3: Elbow - FLIPPED limits to positive -->
+<joint name="joint3" type="revolute">
+  <origin xyz="0.0005 -0.449997 0.001563" rpy="0 0 0"/>
+  <parent link="link2"/>
+  <child link="link3"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit lower="0.05" upper="2" effort="1000" velocity="20"/>
+  <dynamics damping="5.0" friction="0.3"/>
+</joint>
+
+<!-- Joint 4: Wrist pitch - widened for better IK -->
+<joint name="joint4" type="revolute">
+  <origin xyz="0.0 0.094926 0.088393" rpy="0 0 0"/>
+  <parent link="link3"/>
+  <child link="link4"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit lower="-2.9" upper="2.9" effort="5000" velocity="20"/>
+  <dynamics damping="10.0" friction="1.0"/>
+</joint>
+
+<!-- Joint 5: Wrist roll - widened for better IK -->
+<joint name="joint5" type="revolute">
+  <origin xyz="0.0 0.345735 0.003236" rpy="0 0 0"/>
+  <parent link="link4"/>
+  <child link="link5"/>
+  <axis xyz="1.0 0.0 0.0"/>
+  <limit lower="-2.9" upper="2.9" effort="1000" velocity="20"/>
+  <dynamics damping="10.0" friction="2.0"/>
+</joint>
+
+<!-- Joint 6: End effector rotation -->
+<joint name="joint6" type="revolute">
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  <parent link="link5"/>
+  <child link="link6"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit lower="-3.14" upper="3.14" effort="1000" velocity="20"/>
+  <dynamics damping="10.0" friction="0.5"/>
+</joint>
+
+<!-- End effector fixed joint -->
+<joint name="joint_ee" type="fixed">
+  <origin xyz="0.0 0.16 0.0" rpy="0 0 0"/>
+  <parent link="link6"/>
+  <child link="link_ee"/>
+</joint>
+
+<!-- Camera 1: Overview camera on forearm (link4) -->
+<link name="camera1">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.005 0.005 0.005"/>
+    </geometry>
+    <material name="red">
+      <color rgba="1 0 0 1"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.005 0.005 0.005"/>
+    </geometry>
+  </collision>
+  <inertial>
+    <mass value="1e-5"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+</link>
+
+<joint name="camera1_joint" type="fixed">
+  <axis xyz="1 1 0"/>
+  <origin xyz="0 0.1 0.075" rpy="0 0 1.57"/>
+  <parent link="link4"/>
+  <child link="camera1"/>
+</joint>
+
+<!-- Camera 2: Close-up camera near end effector (link6) -->
+<link name="camera2">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.005 0.005 0.005"/>
+    </geometry>
+    <material name="red">
+      <color rgba="1 0 0 1"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.005 0.005 0.005"/>
+    </geometry>
+  </collision>
+  <inertial>
+    <mass value="1e-5"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+  </inertial>
+</link>
+
+<joint name="camera2_joint" type="fixed">
+  <axis xyz="1 1 0"/>
+  <origin xyz="0 0.05 0.075" rpy="0 0 1.57"/>
+  <parent link="link6"/>
+  <child link="camera2"/>
+</joint>
+
+</robot>

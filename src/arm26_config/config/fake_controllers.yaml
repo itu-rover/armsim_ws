@@ -1,0 +1,11 @@
+# Fake controller configuration for demo mode (without Gazebo)
+controller_list:
+  - name: fake_arm26_arm_controller
+    type: interpolate
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6

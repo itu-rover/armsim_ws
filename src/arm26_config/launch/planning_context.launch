@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Robot description argument -->
+  <arg name="load_robot_description" default="true"/>
+
+  <!-- Load universal robot description -->
+  <param name="robot_description" 
+         command="xacro $(find arm26_description)/urdf/arm26.urdf"
+         if="$(arg load_robot_description)"/>
+
+  <!-- The semantic description that corresponds to the URDF -->
+  <param name="robot_description_semantic" 
+         textfile="$(find arm26_config)/config/arm26.srdf"/>
+
+  <!-- Load updated joint limits (override information from URDF) -->
+  <group ns="robot_description_planning">
+    <rosparam command="load" file="$(find arm26_config)/config/joint_limits.yaml"/>
+  </group>
+
+  <!-- Load default settings for kinematics; these settings are overridden by settings in a node's namespace -->
+  <group ns="robot_description_kinematics">
+    <rosparam command="load" file="$(find arm26_config)/config/kinematics.yaml"/>
+  </group>
+
+</launch>

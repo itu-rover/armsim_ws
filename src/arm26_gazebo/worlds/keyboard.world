@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="keyboard_world">
+    <physics type="ode">
+      <ode>
+        <solver>
+          <island_threads>6</island_threads>
+        </solver>
+      </ode>
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <light name="sun" type="directional">
+      <pose frame="">0 0 100 0 0.8 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <cast_shadows>1</cast_shadows>
+    </light>
+
+    <scene>
+      <ambient>0.6 0.6 0.6 1.0</ambient>
+      <shadows>true</shadows>
+    </scene>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+  </world>
+</sdf>

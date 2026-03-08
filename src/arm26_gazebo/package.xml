@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>arm26_gazebo</name>
+  <version>0.1.0</version>
+  <description>Gazebo simulation for the Leonidis robot arm</description>
+
+  <maintainer email="user@example.com">User</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>controller_manager</depend>
+  <depend>effort_controllers</depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_ros_control</depend>
+  <depend>joint_state_controller</depend>
+  <depend>joint_trajectory_controller</depend>
+  <depend>arm26_description</depend>
+  <depend>position_controllers</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>xacro</depend>
+
+  <export>
+    <gazebo_ros gazebo_model_path="${prefix}/.."/>
+  </export>
+</package>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- MoveIt options -->
+  <arg name="pipeline" default="ompl" doc="Planning pipeline to use with MoveIt"/>
+
+  <!-- Gazebo options -->
+  <arg name="gazebo_gui" default="true" doc="Start Gazebo GUI"/>
+  <arg name="paused" default="true" doc="Start Gazebo paused"/>
+
+  <!-- Controller type - using position controller by default (more stable) -->
+  <arg name="controller" default="position_joint_trajectory_controller" 
+       doc="Controller to use (effort_joint_trajectory_controller or position_joint_trajectory_controller)"/>
+
+  <!-- Load SRDF for MoveIt (at root and move_group namespaces) -->
+  <param name="robot_description_semantic" 
+         command="cat $(find arm26_config)/config/arm26.srdf"/>
+  <param name="move_group/robot_description_semantic" 
+         command="cat $(find arm26_config)/config/arm26.srdf"/>
+
+  <!-- Load kinematics.yaml in move_group namespace -->
+  <rosparam ns="move_group" file="$(find arm26_config)/config/kinematics.yaml"/>
+  <rosparam file="$(find arm26_config)/config/kinematics.yaml" command="load"/>
+
+  <!-- Panel simulation -->
+  <arg name="panel" default="false" doc="Spawn panel model with ArUco landmarks"/>
+
+  <!-- Keyboard simulation -->
+  <arg name="keyboard" default="false" doc="Spawn keyboard model"/>
+
+  <!-- Launch the gazebo simulator and spawn the robot -->
+  <include file="$(find arm26_gazebo)/launch/arm26.launch">
+    <arg name="headless" value="$(eval not arg('gazebo_gui'))"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="controller" value="$(arg controller)"/>
+    <arg name="panel" value="$(arg panel)"/>
+    <arg name="keyboard" value="$(arg keyboard)"/>
+  </include>
+
+  <!-- Launch MoveIt -->
+  <include file="$(find arm26_config)/launch/move_group.launch">
+    <!-- robot_description is loaded by arm26.launch in gazebo -->
+    <arg name="load_robot_description" value="false"/>
+    <!-- MoveItSimpleControllerManager provides ros_control's JointTrajectory controllers -->
+    <arg name="moveit_controller_manager" value="simple"/>
+    <arg name="pipeline" value="$(arg pipeline)"/>
+  </include>
+
+  <!-- Start RViz with MoveIt plugin -->
+  <include file="$(find arm26_config)/launch/moveit_rviz.launch">
+    <arg name="rviz_config" value="$(find arm26_config)/launch/moveit.rviz"/>
+  </include>
+
+</launch>

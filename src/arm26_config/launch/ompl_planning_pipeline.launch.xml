@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- OMPL Planning Configuration -->
+  <arg name="planning_plugin" default="ompl_interface/OMPLPlanner"/>
+  <arg name="request_adapters" default="default_planner_request_adapters/AddTimeOptimalParameterization
+                                        default_planner_request_adapters/ResolveConstraintFrames
+                                        default_planner_request_adapters/FixWorkspaceBounds
+                                        default_planner_request_adapters/FixStartStateBounds
+                                        default_planner_request_adapters/FixStartStateCollision
+                                        default_planner_request_adapters/FixStartStatePathConstraints"/>
+  <arg name="start_state_max_bounds_error" default="0.1"/>
+
+  <param name="planning_plugin" value="$(arg planning_plugin)"/>
+  <param name="request_adapters" value="$(arg request_adapters)"/>
+  <param name="start_state_max_bounds_error" value="$(arg start_state_max_bounds_error)"/>
+
+  <rosparam command="load" file="$(find arm26_config)/config/ompl_planning.yaml"/>
+</launch>

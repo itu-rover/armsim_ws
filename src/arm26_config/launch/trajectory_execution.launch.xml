@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Trajectory Execution Functionality -->
+  <arg name="moveit_manage_controllers" default="true"/>
+  <param name="moveit_manage_controllers" value="$(arg moveit_manage_controllers)"/>
+  <!-- Very relaxed tolerances for Gazebo simulation -->
+  <param name="trajectory_execution/allowed_execution_duration_scaling" value="5.0"/>
+  <param name="trajectory_execution/allowed_goal_duration_margin" value="5.0"/>
+  <!-- Relaxed start tolerance for simulation -->
+  <param name="trajectory_execution/allowed_start_tolerance" value="0.5"/>
+</launch>

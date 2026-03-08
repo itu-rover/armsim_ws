@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="execution_type" default="interpolate"/>
+  
+  <!-- Set the param that trajectory_execution_manager needs to find the controller plugin -->
+  <param name="move_group/moveit_controller_manager" value="moveit_fake_controller_manager/MoveItFakeControllerManager"/>
+  <param name="moveit_controller_manager" value="moveit_fake_controller_manager/MoveItFakeControllerManager"/>
+
+  <!-- Controller list for fake controller manager - must be loaded in move_group namespace -->
+  <rosparam ns="move_group" file="$(find arm26_config)/config/fake_controllers.yaml"/>
+  <rosparam file="$(find arm26_config)/config/fake_controllers.yaml"/>
+</launch>

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Gazebo & GUI Configuration -->
+  <arg name="gazebo" default="true" doc="Should the gazebo simulation be launched?" />
+  <arg name="headless" default="false" doc="Should the gazebo GUI be launched?" />
+  <arg name="paused" default="false" doc="Should the simulation directly be stopped at 0s?" />
+  <arg name="rviz" default="false" doc="Should RViz be launched?" />
+
+  <!-- Robot Customization -->
+  <arg name="arm_id" default="arm26" doc="Name of the robot to spawn" />
+  <arg name="controller" default="position_joint_trajectory_controller" doc="Controller to start (effort_joint_trajectory_controller or position_joint_trajectory_controller)" />
+  <arg name="x" default="0" doc="How far forward to place the base of the robot in [m]?" />
+  <arg name="y" default="0" doc="How far leftwards to place the base of the robot in [m]?" />
+  <arg name="z" default="0" doc="How far upwards to place the base of the robot in [m]?" />
+  <arg name="roll" default="0" doc="How much to rotate the base of the robot around its X-axis in [rad]?" />
+  <arg name="pitch" default="0" doc="How much to rotate the base of the robot around its Y-axis in [rad]?" />
+  <arg name="yaw" default="0" doc="How much to rotate the base of the robot around its Z-axis in [rad]?" />
+
+  <!-- Initial joint configuration (must be within joint limits!) -->
+  <arg name="initial_joint_positions"
+       doc="Initial joint configuration of the arm26. Specify as a list of name/value pairs in form of '-J [name-of-joint] [value-in-rad]'"
+        default="-J joint1 0
+                 -J joint2 1.05
+                 -J joint3 1.0
+                 -J joint4 0
+                 -J joint5 0
+                 -J joint6 0" />
+
+  <arg name="panel" default="false" doc="Should the panel model and aruco detection be launched?" />
+
+  <arg name="keyboard" default="false" doc="Should the keyboard model be spawned?" />
+
+  <arg name="world" default="$(eval find('blender_gazebo') + '/worlds/marsyard2021.world' if arg('panel') else (find('arm26_gazebo') + '/worlds/keyboard.world' if arg('keyboard') else find('arm26_gazebo') + '/worlds/arm26.world'))" doc="Filename to a SDF World for gazebo to use" />
+
+  <!-- Launch Gazebo -->
+  <param name="/use_sim_time" value="true" />
+  
+  <arg name="gzserver_paused_arg" value="$(eval '-u' if arg('paused') else '')" />
+  <node name="gazebo" pkg="gazebo_ros" type="gzserver" respawn="false" output="log"
+        args="$(arg world) $(arg gzserver_paused_arg)" if="$(arg gazebo)" />
+
+  <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen" if="$(eval not arg('headless'))"/>
+
+  <!-- Load robot description -->
+  <param name="robot_description"
+         command="xacro $(find arm26_description)/urdf/arm26.urdf" />
+
+  <!-- Load controller configurations -->
+  <rosparam file="$(find arm26_gazebo)/config/sim_controllers.yaml" command="load"/>
+
+  <!-- Spawn the robot in Gazebo -->
+  <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
+  <node name="$(arg arm_id)_model_spawner"
+        pkg="gazebo_ros"
+        type="spawn_model"
+        args="-param robot_description -urdf -model $(arg arm_id) $(arg unpause)
+              -x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)
+              $(arg initial_joint_positions)" />
+
+  <!-- Spawn controllers -->
+  <node pkg="controller_manager"
+        type="spawner"
+        name="$(arg arm_id)_controller_spawner"
+        respawn="false" output="screen"
+        args="joint_state_controller $(arg controller)" />
+
+  <!-- Robot State Publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <remap from="joint_states" to="joint_states"/>
+  </node>
+
+  <!-- RViz -->
+  <node pkg="rviz" type="rviz" output="screen" name="rviz" 
+        args="-d $(find arm26_description)/launch/urdf.rviz" if="$(arg rviz)"/>
+
+  <group if="$(arg panel)">
+    <node name="panel_model_spawner"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-file $(find panel)/urdf/panel.urdf -urdf -model panel
+                -x -0.15 -y 1.2 -z 0"
+          output="screen" />
+  </group>
+
+  <group if="$(arg keyboard)">
+    <node name="keyboard_model_spawner"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-file $(find arm26_gazebo)/urdf/keyboard.urdf -urdf -model keyboard
+                -x 0 -y 0.6 -z 0.65 -R 0 -P 0 -Y 0"
+          output="screen" />
+  </group>
+
+</launch>

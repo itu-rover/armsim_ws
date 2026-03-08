@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="arm26">
+    <group name="arm26_arm">
+        <chain base_link="base_link" tip_link="link_ee"/>
+    </group>
+
+    <!--GROUP STATES: Valid joint values within limits
+        Joint limits (updated):
+        - joint1: -1 to 1
+        - joint2: 0.1 to 3.14 (positive only now!)
+        - joint3: 0.05 to 2 (positive only now!)
+        - joint4: -1.57 to 1.57
+        - joint5: -1.57 to 1.57
+        - joint6: -3.14 to 3.14
+    -->
+    <group_state name="home" group="arm26_arm">
+        <joint name="joint1" value="0"/>
+        <joint name="joint2" value="1.62"/>
+        <joint name="joint3" value="1.0"/>
+        <joint name="joint4" value="0"/>
+        <joint name="joint5" value="0"/>
+        <joint name="joint6" value="0"/>
+    </group_state>
+    <group_state name="extended" group="arm26_arm">
+        <joint name="joint1" value="0"/>
+        <joint name="joint2" value="0.5"/>
+        <joint name="joint3" value="0.5"/>
+        <joint name="joint4" value="0"/>
+        <joint name="joint5" value="0"/>
+        <joint name="joint6" value="0"/>
+    </group_state>
+    <group_state name="ready" group="arm26_arm">
+        <joint name="joint1" value="0"/>
+        <joint name="joint2" value="2.0"/>
+        <joint name="joint3" value="1.5"/>
+        <joint name="joint4" value="0.5"/>
+        <joint name="joint5" value="0"/>
+        <joint name="joint6" value="0"/>
+    </group_state>
+
+    <group_state name="look_panel" group="arm26_arm">
+        <joint name="joint1" value="0"/>
+        <joint name="joint2" value="1.05"/>
+        <joint name="joint3" value="1.0"/>
+        <joint name="joint4" value="0"/>
+        <joint name="joint5" value="0"/>
+        <joint name="joint6" value="0"/>
+    </group_state>
+
+    <!--DISABLE COLLISIONS-->
+    <disable_collisions link1="world" link2="base_link" reason="Adjacent"/>
+    <disable_collisions link1="world" link2="link1" reason="Never"/>
+    <disable_collisions link1="world" link2="link2" reason="Never"/>
+    <disable_collisions link1="world" link2="link3" reason="Never"/>
+    <disable_collisions link1="world" link2="link4" reason="Never"/>
+    <disable_collisions link1="world" link2="link5" reason="Never"/>
+    <disable_collisions link1="world" link2="link6" reason="Never"/>
+    <disable_collisions link1="world" link2="link_ee" reason="Never"/>
+    <disable_collisions link1="world" link2="camera1" reason="Never"/>
+    <disable_collisions link1="world" link2="camera2" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link1" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="camera1" reason="Never"/>
+    <disable_collisions link1="base_link" link2="camera2" reason="Never"/>
+    <disable_collisions link1="link1" link2="link2" reason="Adjacent"/>
+    <disable_collisions link1="link1" link2="camera1" reason="Never"/>
+    <disable_collisions link1="link1" link2="camera2" reason="Never"/>
+    <disable_collisions link1="link2" link2="link3" reason="Adjacent"/>
+    <disable_collisions link1="link2" link2="camera1" reason="Never"/>
+    <disable_collisions link1="link2" link2="camera2" reason="Never"/>
+    <disable_collisions link1="link3" link2="link4" reason="Adjacent"/>
+    <disable_collisions link1="link3" link2="camera1" reason="Never"/>
+    <disable_collisions link1="link3" link2="camera2" reason="Never"/>
+    <disable_collisions link1="link4" link2="link5" reason="Adjacent"/>
+    <disable_collisions link1="link4" link2="camera1" reason="Adjacent"/>
+    <disable_collisions link1="link4" link2="camera2" reason="Never"/>
+    <disable_collisions link1="link5" link2="link6" reason="Adjacent"/>
+    <disable_collisions link1="link5" link2="camera1" reason="Never"/>
+    <disable_collisions link1="link5" link2="camera2" reason="Never"/>
+    <disable_collisions link1="link6" link2="link_ee" reason="Adjacent"/>
+    <disable_collisions link1="link6" link2="camera1" reason="Never"/>
+    <disable_collisions link1="link6" link2="camera2" reason="Adjacent"/>
+    <disable_collisions link1="link_ee" link2="camera1" reason="Never"/>
+    <disable_collisions link1="link_ee" link2="camera2" reason="Never"/>
+    <disable_collisions link1="camera1" link2="camera2" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link2" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link3" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link4" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link5" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link6" reason="Never"/>
+    <disable_collisions link1="base_link" link2="link_ee" reason="Never"/>
+    <disable_collisions link1="link1" link2="link3" reason="Never"/>
+    <disable_collisions link1="link1" link2="link4" reason="Never"/>
+    <disable_collisions link1="link1" link2="link5" reason="Never"/>
+    <disable_collisions link1="link1" link2="link6" reason="Never"/>
+    <disable_collisions link1="link1" link2="link_ee" reason="Never"/>
+    <disable_collisions link1="link2" link2="link4" reason="Never"/>
+    <disable_collisions link1="link2" link2="link5" reason="Never"/>
+    <disable_collisions link1="link2" link2="link6" reason="Never"/>
+    <disable_collisions link1="link2" link2="link_ee" reason="Never"/>
+    <disable_collisions link1="link3" link2="link5" reason="Never"/>
+    <disable_collisions link1="link3" link2="link6" reason="Never"/>
+    <disable_collisions link1="link3" link2="link_ee" reason="Never"/>
+    <disable_collisions link1="link4" link2="link6" reason="Never"/>
+    <disable_collisions link1="link4" link2="link_ee" reason="Never"/>
+    <disable_collisions link1="link5" link2="link_ee" reason="Never"/>
+</robot>
+

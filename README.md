@@ -1,11 +1,31 @@
 # Arm26 Simulation Workspace
 
-## Simulation
+## Simulation Configurations
 
-Simulation can be launched with:
+You can start the simulation in different configurations depending on your needs.
+
+### Standard Simulation
+
+To launch the standard simulation without any additional peripherals:
 
 ```
-roslaunch arm26_config demo_gazebo.launch keyboard:=true panel:=true
+roslaunch arm26_config demo_gazebo.launch
+```
+
+### Keyboard Simulation
+
+To start the simulation with the keyboard model included:
+
+```
+roslaunch arm26_config demo_gazebo.launch keyboard:=true
+```
+
+### Panel Simulation
+
+To start the simulation with the interaction panel included:
+
+```
+roslaunch arm26_config demo_gazebo.launch panel:=true
 ```
 
 ## ArUco Detection

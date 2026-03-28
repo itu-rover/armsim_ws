@@ -4,6 +4,12 @@
         <chain base_link="base_link" tip_link="link_ee"/>
     </group>
 
+    <group name="arm26_hand">
+        <link name="link_ee"/>
+    </group>
+
+    <end_effector name="arm26_hand" parent_link="link6" group="arm26_hand" parent_group="arm26_arm"/>
+
     <!--GROUP STATES: Valid joint values within limits
         Joint limits (updated):
         - joint1: -1 to 1
